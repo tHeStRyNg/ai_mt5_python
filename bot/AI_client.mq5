@@ -1,3 +1,12 @@
+//+------------------------------------------------------------------+
+//|                                                    AI_client.mq5 |
+//|                               Copyright 2023, Alggorithmic, GMBH |
+//|                                      https://www.algorithmic.one |
+//+------------------------------------------------------------------+
+#property copyright "Copyright 2023, Algorithmic, GMBH"
+#property link      "https://www.algorithmic.one"
+#property version   "1.00"
+
 #define MAX_BUFF_LEN 2048
 #define TIMEOUT 10000
 
