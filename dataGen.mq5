@@ -1,8 +1,17 @@
-// Input parameters for the file
+//+------------------------------------------------------------------+
+//|                                                      dataGen.mq5 |
+//|                               Copyright 2023, Alggorithmic, GMBH |
+//|                                      https://www.algorithmic.one |
+//+------------------------------------------------------------------+
+#property copyright "Copyright 2023, Algorithmic, GMBH"
+#property link      "https://www.algorithmic.one"
+#property version   "1.00"
+
+// These are the Input parameters for the file data.csv to be created
 
 input string         nombre_archivo = "data.csv";  // Name of the fiel to be saved
-input int            num_data_to_save = 10;        // Number of records to save
-input int            candles_to_close_op = 2;      // number of candles from the cross to close operation 
+input int            num_data_to_save = 20;        // Number of records to save
+input int            candles_to_close_op = 5;      // number of candles from the cross to close operation 
 
 // File handler
 int fp = 0;
