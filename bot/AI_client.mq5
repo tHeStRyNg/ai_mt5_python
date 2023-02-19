@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                                                    AI_client.mq5 |
-//|                               Copyright 2023, Alggorithmic, GMBH |
+//|                                Copyright 2023, Algorithmic, GMBH |
 //|                                      https://www.algorithmic.one |
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2023, Algorithmic, GMBH"
