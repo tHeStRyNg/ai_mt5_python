@@ -44,17 +44,19 @@ df[header[-1]] = df[header[-1]].astype('int32')
 # Creating the neural network
 dt = DecisionTreeClassifier()
 
-# Setting the data for trainning
+# Setting the data for training
 X = df.drop('class', axis=1)
 y = df[header[-1]]
 
 # Training the neural network with DT
+print(X)
+print(y)
 dt = dt.fit(X, y)
 
 # Saving the model
 with open("dt_model.pkl", "wb") as f:
     pickle.dump(dt, f)
-    
+
 # To load
-# with open("nn_model.pkl", "rb") as f:
+#with open("dt_model.pkl", "rb") as f:
 #     nn = pickle.load(f)

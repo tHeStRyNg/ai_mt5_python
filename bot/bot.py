@@ -34,7 +34,7 @@ class Bot:
                              args=(self.pill2kill, self.data, self.trading_data))
         self.threads.append(t)
         t.start()
-        print('Thread - ORDERS. LAUNCHED')
+        print('Thread AI - ORDERS. LAUNCHED')
     
     def kill_threads(self):
         """Function to kill all the loaded threads."""

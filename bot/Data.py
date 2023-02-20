@@ -25,18 +25,18 @@ def thread_data(stop_event, data):
         
         if "END CONNECTION" in msg:
             break
-        
+            
         msg_splitted = msg.split(',')
         
-        try:
-            msg_splitted = [ float(elem) for elem in msg_splitted ]
-            data['data'] = msg_splitted
-            data['macd'] = msg_splitted[40:59]
-            data['signal'] = msg_splitted[60:79]
-        except:
-            print("[INFO]\tERROR TRYING TO CONVERT TO FLOAT DATATYPR, IGNORED");
+        msg_splitted = [ float(elem) for elem in msg_splitted if elem ]
+        data['data'] = msg_splitted
+        data['macd'] = msg_splitted[20:29]
+        data['signal'] = msg_splitted[30:39]
         
     connection.close()
     server_socket.close()
+
+def new_func(data):
+    print(data)
         
      
