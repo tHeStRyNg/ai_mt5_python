@@ -50,7 +50,7 @@ class Bot:
     
     def wait(self):
         """Function to make the thread wait."""
-        # Input to stop the bot
+        # Input to stop the Server
         print('\nPress ENTER to stop the bot\n')
         input()
         self.kill_threads()
