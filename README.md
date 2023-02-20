@@ -24,5 +24,11 @@ More info --> https://www.algorithmic.one/#ai_mreb
 This will generate the data.csv with the last 10 years of correlated.
 2. Run AI.py so the dt_model which is the decision tree pickle file is generated based on the dataset from step 1. More info on Machine Learning in Python https://scikit-learn.org !
 3. Start the server AI ```python main.py```.
+
+![Capture2](https://user-images.githubusercontent.com/118682909/219991837-606805c3-1529-4fc8-b040-47a2b1a1bbaf.PNG)
+
 4. Start on MT5 the client AI_client.ex5 (add the compiled EA to MT5 Chart) that will receive orders based on AI ML using socket on defined port.
+
+![Capture1](https://user-images.githubusercontent.com/118682909/219991884-dc71bca7-a9aa-47a2-b84a-6a87decf9281.PNG)
+
 5. Done Its running.
