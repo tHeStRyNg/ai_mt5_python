@@ -41,3 +41,9 @@ This will generate the data.csv with the last 10 years of correlated.
 
 ![Capture3](https://user-images.githubusercontent.com/118682909/220189032-34b18e46-4cf9-4188-be1e-14a5dc030654.PNG)
 
+#### Orders Candles Intervals
+There is a setting for giving intervals between orders. in this case the setting is to be with an interval of 2 candles between orders.
+Here is an example of its execution of VAR ```CANDLES_BETWEEN_OPERATIONS = 2``` on ```orders.py```
+
+![image](https://user-images.githubusercontent.com/118682909/220192133-40298b64-57b0-4ed3-82fa-296ad60dacb1.png)
+
