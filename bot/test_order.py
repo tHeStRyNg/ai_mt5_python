@@ -25,7 +25,7 @@ if not symbol_info.visible:
         mt5.shutdown()
         quit()
  
-lot = 0.1
+lot = 1.0
 point = mt5.symbol_info(symbol).point
 price = mt5.symbol_info_tick(symbol).ask
 deviation = 20
@@ -39,7 +39,7 @@ request = {
     "tp": price + 100 * point,
     "deviation": deviation,
     "magic": 234000,
-    "comment": "Algorithmic GMBH - Python Script Open Test - test_order.py - type_filling Validated",
+    "comment": "python script open",
     "type_time": mt5.ORDER_TIME_GTC,
     "type_filling": mt5.ORDER_FILLING_FOK,
 }
