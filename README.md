@@ -18,7 +18,11 @@ More info --> https://www.algorithmic.one/#ai_mreb
 ### Requirements
 ```pip install scikit-learn```
 ```pip install pandas```
- 
+
 #### How to Setup
-Generate the dataset data.csv with the help of dataGen based on the last 10 years by loading the ex5 with MT5 Tester and doing a backtest.
+1. Run dataGen.ex5 to Generate the dataset data.csv with the help of dataGen based on the last 10 years by loading the ex5 with MT5 Tester and doing a backtest.
 This will generate the data.csv with the last 10 years of correlated.
+2. Run AI.py so the dt_model pickle file is generated based on step 1 more info on https://scikit-learn.org/
+3. Start the server AI ```python main.py```.
+4. Start on MT5 the client AI_client.ex5 (add the compiled EA to MT5 Chart)that will receive orders based on AI ML using socket on defined port.
+5. Done Its running.
