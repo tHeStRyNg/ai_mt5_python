@@ -53,7 +53,7 @@ def open_position(market: str, lotage: float, type):
         "tp": price + 100 * point,
         "deviation": deviation,
         "magic": 234000,
-        "comment": "AI ML Python SKL DL Opened",
+        "comment": "AI.ML.Py.SKL.DL",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_FOK,
     }
@@ -97,13 +97,13 @@ def thread_orders_AI(stop_event, data, trading_data):
         cur_time = int((datetime.datetime.utcnow()- ep).total_seconds())
         
         if dt.predict([data['data']])[0] >= 0.5 and not operation_open \
-        and data['signal'][1] > data['macd'][1] and data['signal'][0] < data['macd'][0]: # Open buy
+        and data['signal'][1] < data['macd'][1] and data['signal'][0] > data['macd'][0]: # Open buy
             last_operation_time = cur_time
             result = open_position(trading_data["market"], trading_data["lotage"], mt5.ORDER_TYPE_BUY)
             operation_open = True
         
         if dt.predict([data['data']])[0] >= 0.5 and not operation_open \
-        and data['signal'][1] < data['macd'][1] and data['signal'][0] > data['macd'][0]: # Open sell
+        and data['signal'][1] > data['macd'][1] and data['signal'][0] < data['macd'][0]: # Open sell
             last_operation_time = cur_time
             result = open_position(trading_data["market"], trading_data["lotage"], mt5.ORDER_TYPE_SELL)
             operation_open = True

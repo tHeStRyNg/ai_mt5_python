@@ -32,6 +32,7 @@ def thread_data(stop_event, data):
         data['data'] = msg_splitted
         data['macd'] = msg_splitted[20:29]
         data['signal'] = msg_splitted[30:39]
+        print(data)
         
     connection.close()
     server_socket.close()    
