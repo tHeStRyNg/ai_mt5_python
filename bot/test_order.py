@@ -1,23 +1,23 @@
 import MetaTrader5 as mt5
  
-# We show the data about the installed mt5 version and author
+# mostramos los datos sobre el paquete MetaTrader5
 print("MetaTrader5 package author: ", mt5.__author__)
 print("MetaTrader5 package version: ", mt5.__version__)
  
-# We establish a connection with terminal on MetaTrader 5
+# establecemos la conexión con el terminal MetaTrader 5
 if not mt5.initialize():
     print("initialize() failed, error code =",mt5.last_error())
     quit()
  
-# prepare the structure to do a buy order
-symbol = "EURUSD"
+# preparamos la estructura de la solicitud de compra
+symbol = "BTCEUR"
 symbol_info = mt5.symbol_info(symbol)
 if symbol_info is None:
     print(symbol, "not found, can not call order_check()")
     mt5.shutdown()
     quit()
  
-# if the simbol isnt available on MarketWatch, we add it
+# si el símbolo no está disponible en MarketWatch, lo añadimos
 if not symbol_info.visible:
     print(symbol, "is not visible, trying to switch on")
     if not mt5.symbol_select(symbol,True):
@@ -25,7 +25,7 @@ if not symbol_info.visible:
         mt5.shutdown()
         quit()
  
-lot = 1.0
+lot = 0.1
 point = mt5.symbol_info(symbol).point
 price = mt5.symbol_info_tick(symbol).ask
 deviation = 20
@@ -44,17 +44,17 @@ request = {
     "type_filling": mt5.ORDER_FILLING_FOK,
 }
  
-# we send the commercial request
+# enviamos la solicitud comercial
 result = mt5.order_send(request)
-# confirm the resut of the operation
+# comprobamos el resultado de la ejecución
 print("1. order_send(): by {} {} lots at {} with deviation={} points".format(symbol,lot,price,deviation));
 if result.retcode != mt5.TRADE_RETCODE_DONE:
     print("2. order_send failed, retcode={}".format(result.retcode))
-   # we request the result in a dictionary form and we display it item by item 
+   # solicitamos el resultado en forma de diccionario y lo mostramos elemento por elemento
     result_dict=result._asdict()
     for field in result_dict.keys():
         print("   {}={}".format(field,result_dict[field]))
-        # if its the structure of the commercial request we also display it item by item
+        # si se trata de la estructura de una solicitud comercial, también la mostramos elemento por elemento
         if field=="request":
             traderequest_dict=result_dict[field]._asdict()
             for tradereq_filed in traderequest_dict:

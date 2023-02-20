@@ -3,7 +3,7 @@ import datetime, pickle
 
 
 AI_FILE = 'dt_model.pkl'
-CANDLES_BETWEEN_OPERATIONS = 0
+CANDLES_BETWEEN_OPERATIONS = 2
 
 
 def close_position(market: str, lotage: float, result):
@@ -32,7 +32,7 @@ def close_position(market: str, lotage: float, result):
     return result
 
 
-def open_position(market: str, lotage: float, type):
+def open_position(market: str, lotage: float):
     """Function to open a position.
 
     Args:
@@ -47,7 +47,7 @@ def open_position(market: str, lotage: float, type):
         "action": mt5.TRADE_ACTION_DEAL,
         "symbol": market,
         "volume": lotage,
-        "type": type,
+        "type": mt5.ORDER_TYPE_SELL,
         "price": price,
         "deviation": deviation,
         "magic": 234000,
@@ -82,28 +82,21 @@ def thread_orders_AI(stop_event, data, trading_data):
     
     # Loading the Neural network
     with open("dt_model.pkl", "rb") as f:
-        dt = pickle.load(f)
+        nn = pickle.load(f)
 
     # Waiting for the data to be loaded
-    while data['data'] is None:
-        if stop_event.is_set():
-            return
+    while data['rsi_std'] is None:
+        pass
     
     print("[INFO]\tOrders running")
     
     while not stop_event.is_set():
         cur_time = int((datetime.datetime.utcnow()- ep).total_seconds())
         
-        if dt.predict([data['data']])[0] >= 0.5 and not operation_open \
-        and data['signal'][1] > data['macd'][1] and data['signal'][0] < data['macd'][0]: # Open buy
+        if nn.predict([data['rsi_std']])[0] >= 0.5 and not operation_open \
+        and cur_time > last_operation_time+trading_data["time_period"]*CANDLES_BETWEEN_OPERATIONS: # Open buy
             last_operation_time = cur_time
-            result = open_position(trading_data["market"], trading_data["lotage"], mt5.ORDER_TYPE_BUY)
-            operation_open = True
-        
-        if dt.predict([data['data']])[0] >= 0.5 and not operation_open \
-        and data['signal'][1] < data['macd'][1] and data['signal'][0] > data['macd'][0]: # Open sell
-            last_operation_time = cur_time
-            result = open_position(trading_data["market"], trading_data["lotage"], mt5.ORDER_TYPE_SELL)
+            result = open_position(trading_data["market"], trading_data["lotage"])
             operation_open = True
             
         if operation_open and cur_time > last_operation_time+trading_data["time_period"]*CANDLES_BETWEEN_OPERATIONS:
