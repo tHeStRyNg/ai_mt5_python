@@ -15,8 +15,10 @@ More info --> https://www.algorithmic.one/#ai_mreb
 - Install Anaconda
 - Run
 
-
-
+### Requirements
+```pip install scikit-learn```
+```pip install pandas```
+ 
 #### How to Setup
 Generate the dataset data.csv with the help of dataGen based on the last 10 years by loading the ex5 with MT5 Tester and doing a backtest.
 This will generate the data.csv with the last 10 years of correlated.
