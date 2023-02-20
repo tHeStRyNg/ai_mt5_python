@@ -46,6 +46,7 @@ dt = DecisionTreeClassifier()
 
 # Setting the data for training
 X = df.drop('class', axis=1)
+X = X.values
 y = df[header[-1]]
 
 # Training the neural network with DT
