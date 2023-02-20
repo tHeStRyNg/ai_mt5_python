@@ -1,5 +1,6 @@
 import MetaTrader5 as mt5
 import datetime, pickle
+import Data, orders
 
 
 AI_FILE = 'dt_model.pkl'
@@ -85,8 +86,9 @@ def thread_orders_AI(stop_event, data, trading_data):
         nn = pickle.load(f)
 
     # Waiting for the data to be loaded
-    while data['rsi_std'] is None:
-        pass
+    while data['data'] is None:
+        if stop_event.is_set():
+            return
     
     print("[INFO]\tOrders running")
     
