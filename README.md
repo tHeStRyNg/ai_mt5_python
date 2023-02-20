@@ -47,3 +47,13 @@ Here is an example of its execution of VAR ```CANDLES_BETWEEN_OPERATIONS = 2``` 
 
 ![image](https://user-images.githubusercontent.com/118682909/220192133-40298b64-57b0-4ed3-82fa-296ad60dacb1.png)
 
+#### TP and SL
+Both TP and SL are configurable and currently are set at 100 as follows
+
+![image](https://user-images.githubusercontent.com/118682909/220193360-977a8165-b238-421d-b3db-e632625a9f0d.png)
+
+This feature is editable on orders.py as follows:
+```
+        "sl": price - 100 * point,
+        "tp": price + 100 * point,
+```
