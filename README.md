@@ -2,7 +2,7 @@
 
 AI EA bot based on the indicators **MACD**, **RSI** and **EMA** CossOver. 
 
-This EA uses a **Decision Tree (DTs)** which are a non-parametric supervised learning method used for classification and regression. 
+This MT5 EA uses a **Decision Tree (DTs)** which are a non-parametric supervised learning method used for classification and regression. 
 The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. A tree can be seen as a piecewise constant approximation. 
 
 - Ref - https://scikit-learn.org/stable/modules/tree.html#decision-treesNeural 
@@ -36,4 +36,4 @@ This will generate the data.csv with the last 10 years of correlated.
 
 ![Capture1](https://user-images.githubusercontent.com/118682909/219991884-dc71bca7-a9aa-47a2-b84a-6a87decf9281.PNG)
 
-5. Done Its running.
+5. Done It's running.
