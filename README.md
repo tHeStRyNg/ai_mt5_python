@@ -22,7 +22,7 @@ The goal is to create a model that predicts the value of a target variable by le
 - Install Anaconda
 - Run
 
-### Requirements
+### Requirements - PIP version is 22.3.1
 ```pip install -r requirements.txt```
 
 #### How to Setup
