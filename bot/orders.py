@@ -2,7 +2,7 @@ import MetaTrader5 as mt5
 import datetime, pickle
 
 
-AI_FILE = 'nn_model.pkl'
+AI_FILE = 'dt_model.pkl'
 CANDLES_BETWEEN_OPERATIONS = 2
 
 
