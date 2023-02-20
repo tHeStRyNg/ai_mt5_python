@@ -49,9 +49,11 @@ def open_position(market: str, lotage: float, type):
         "volume": lotage,
         "type": type,
         "price": price,
+        "sl": price - 100 * point,
+        "tp": price + 100 * point,
         "deviation": deviation,
         "magic": 234000,
-        "comment": "python script open",
+        "comment": "AI ML Python SKL DL Opened",
         "type_time": mt5.ORDER_TIME_GTC,
         "type_filling": mt5.ORDER_FILLING_FOK,
     }
