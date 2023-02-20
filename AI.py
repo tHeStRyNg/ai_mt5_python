@@ -35,7 +35,7 @@ with open(FILENAME, encoding="cp1252") as f:
         if i%2 == 0 and line != '':
             data.append(fix_line(line))
 
-# Creating a pandas dataframe           
+# Creating a pandas dataframe        
 df = pd.DataFrame(data, columns=header)
 
 # Correcting the class type
@@ -48,13 +48,13 @@ dt = DecisionTreeClassifier()
 X = df.drop('class', axis=1)
 y = df[header[-1]]
 
-# Training the neural network
+# Training the neural network with DT
 dt = dt.fit(X, y)
 
 # Saving the model
 with open("dt_model.pkl", "wb") as f:
     pickle.dump(dt, f)
     
-# To load the model
+# To load
 # with open("nn_model.pkl", "rb") as f:
 #     nn = pickle.load(f)
