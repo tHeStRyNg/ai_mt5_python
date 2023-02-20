@@ -13,7 +13,7 @@
 /* Input parameters */
 input int            PORT = 8680;                  // Connection Port
 input string         ADDR = "localhost";           // Connection Address
-input int            num_data_to_save = 10;        // Number of Data to Save
+input int            num_data_to_save = 20;        // Number of Data to Save
 
 /* To check whether there is an error or not */
 bool     error = false;
