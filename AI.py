@@ -49,8 +49,6 @@ X = df.drop('class', axis=1)
 y = df[header[-1]]
 
 # Training the neural network with DT
-print(X)
-print(y)
 dt = dt.fit(X, y)
 
 # Saving the model
