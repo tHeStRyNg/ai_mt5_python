@@ -8,6 +8,8 @@ The goal is to create a model that predicts the value of a target variable by le
 - Ref - https://scikit-learn.org/stable/modules/tree.html#decision-treesNeural 
 - Ref - Network based on Machine Learning in Python from https://scikit-learn.org ! 
 
+![image](https://user-images.githubusercontent.com/118682909/220060164-f88f5c9a-df7f-4207-a65c-522628115b52.png)
+
 ### How To
 - Install Metatrader 5
 - Inside ```MT5 Options``` click  ```Allow algorithmic trading```
