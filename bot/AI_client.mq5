@@ -11,9 +11,9 @@
 #define TIMEOUT 10000
 
 /* Input parameters */
-input int            PORT = 8680;                  // Puerto de conexión
-input string         ADDR = "localhost";           // Dirección a la que conectarse
-input int            num_data_to_save = 10;        // Número de los datos a guardar
+input int            PORT = 8680;                  // Connection Port to the Server
+input string         ADDR = "localhost";           // IP Address to connect to
+input int            num_data_to_save = 10;        // Amount of Data to save
 
 /* To check whether there is an error or not */
 bool     error = false;

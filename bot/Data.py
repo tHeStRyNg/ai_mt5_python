@@ -30,8 +30,8 @@ def thread_data(stop_event, data):
         
         msg_splitted = [ float(elem) for elem in msg_splitted if elem ]
         data['data'] = msg_splitted
-        data['macd'] = msg_splitted[20:29]
-        data['signal'] = msg_splitted[30:39]
+        data['macd'] = msg_splitted[20:29] # Relates to Amount of Data to save INT on AI_client.mq5
+        data['signal'] = msg_splitted[30:39] # Relates to Amount of Data to save INT on AI_client.mq5
         # Debug on Server Side on Data, EMA, MACD, SIGNAL Being Analysed by SKL DL AI.ML
         print(data)
         
