@@ -9,17 +9,19 @@
 
 // These are the Input parameters for the file data.csv to be created
 
-input string         nombre_archivo = "data.csv";  // Name of the fiel to be saved
-input int            num_data_to_save = 20;        // Number of records to save
-input int            candles_to_close_op = 5;      // number of candles from the cross to close operation 
+// Input parameters for the file
+// Parametros de entrada para un archivo
+input string         nombre_archivo = "data.csv";  // name of the Achive to be generated
+input int            num_data_to_save = 10;        // Amount of data to store
+input int            candles_to_close_op = 2;      // Number of candles before we closes the operation 
 
 // File handler
 int fp = 0;
 
-// String a escribir
+// String to write
 string data = "";
 
-// Candle array
+// Array velas
 MqlRates candles[];
 
 // EMA handler and array
@@ -78,12 +80,14 @@ void OnInit() {
    rsi_h = iRSI(_Symbol, _Period, 14, PRICE_CLOSE);
    macd_h = iMACD(_Symbol, _Period, 12, 26, 9, PRICE_CLOSE);
   
+   
    ArraySetAsSeries(ema, true); 
    ArraySetAsSeries(rsi, true);
    ArraySetAsSeries(macd, true);
    ArraySetAsSeries(signal, true);
    ArraySetAsSeries(candles, true);
 }
+
 
 void OnTick() {
    // Loading information
