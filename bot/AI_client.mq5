@@ -11,7 +11,7 @@
 #define TIMEOUT 10000
 
 /* Input parameters */
-input int            PORT = 8680;                  // Puerto de conexión
+input int            PORT = 8688;                  // Puerto de conexión
 input string         ADDR = "localhost";           // Dirección a la que conectarse
 input int            num_data_to_save = 10;        // Número de los datos a guardar
 
@@ -21,43 +21,58 @@ bool     error = false;
 /* Socket variables */
 int      socket;                 // Socket handle
 
+/* EMA variables */
+int ema_h;                       // EMA handle
+double ema[];                    // EMA array
+
 /* RSI variables */
 int      rsi_h;                  // RSI handle
 double   rsi[];                  // RSI array
 
-/* Std deviation variables */
-int      std_h;                  // STD deviation handle
-double   std[];                  // std array
+/* MACD variables */
+int macd_h;                      // MACD handle
+double macd[];                   // MACD array
+double signal[];                 // SIGNAL array
 
 /* Velas */
 MqlRates candles[];              // Velas
 
+/* Operation */
+enum op_types  // constant enumeration
+{ SELL, BUY };
+
+op_types last_operation;
+
 /* To check if a message has been sent */
 bool sent = false;
 
+// Function to know if there is a BUY cross
+bool buy_cross() { return signal[1] > macd[1] && signal[0] < macd[0]; }
 
-// Function to know if the previous candle is a boom
-// Función para saber si la vela anterior es un boom
-bool es_anterior_boom() { return candles[1].close > candles[1].open; }
-
+// Function to know if there is a SELL cross
+bool sell_cross() { return signal[1] < macd[1] && signal[0] > macd[0]; }
 
 void OnInit() {
 
-   // Inicializando rsi y std
-   // Initializing rsi and std
+   // Inicializando rsi, macd y ema
    rsi_h = iRSI(_Symbol, _Period, 14, PRICE_CLOSE);
    if (rsi_h == INVALID_HANDLE) Print("Error - 3.1: iRSI failure. ", GetLastError());
 
-   std_h = iStdDev(_Symbol, _Period, 20, 0, MODE_SMA, PRICE_CLOSE);
-   if (std_h == INVALID_HANDLE) Print("Error - 3.2: iStdDev failure. ", GetLastError());
+   macd_h = iMACD(_Symbol, _Period, 12, 26, 9, PRICE_CLOSE);
+   if (macd_h == INVALID_HANDLE) Print("Error - 3.2: iMACD failure. ", GetLastError());
 
-   if (rsi_h == INVALID_HANDLE || std_h == INVALID_HANDLE) {
+   ema_h = iMA(_Symbol, _Period, 200, 0, MODE_EMA, PRICE_CLOSE);
+   if (ema_h == INVALID_HANDLE) Print("Error - 3.3: iMA failure. ", GetLastError());
+
+   if (rsi_h == INVALID_HANDLE || macd_h == INVALID_HANDLE || ema_h == INVALID_HANDLE) {
       error = true;
       return;
    }
 
    ArraySetAsSeries(rsi, true);
-   ArraySetAsSeries(std, true);
+   ArraySetAsSeries(macd, true);
+   ArraySetAsSeries(signal, true);
+   ArraySetAsSeries(ema, true);
    ArraySetAsSeries(candles, true);
 
    // Initializing the socket
@@ -92,35 +107,55 @@ void OnTick() {
 
    if (error) return;
 
-   // Cargando velas, el rsi y los valores del std
    // Loading the candles, rsi and std values
    CopyBuffer(rsi_h, 0, 0, num_data_to_save, rsi);
-   CopyBuffer(std_h, 0, 0, num_data_to_save+1, std);
+   CopyBuffer(ema_h, 0, 0, num_data_to_save, ema);
+   CopyBuffer(macd_h, MAIN_LINE, 0, num_data_to_save, macd);
+   CopyBuffer(macd_h, SIGNAL_LINE, 0, num_data_to_save, signal);
    CopyRates(_Symbol, _Period, 0, num_data_to_save, candles);
 
-   // Si el anterior es boom vamos preparar los datos para enviarlos
-   // If the previous one is a boom we are going to save data in the file
-   if (es_anterior_boom() && !sent) {
+   // If the previous one is cross we are going to save data in the file
+   if ((buy_cross() || sell_cross()) && !sent) {
 
       string data = "";
    
+      // Saving the EMA
+      string ema_data = "";
+      for(int i = 0; i < num_data_to_save; i++) {
+         double ema_normalized = NormalizeDouble(ema[i], _Digits);
+         ema_data += DoubleToString(ema_normalized)+",";
+      }
+      
       // Saving the RSI
-      // Guardamos el RSI
       string rsi_data = "";
       for(int i = 0; i < num_data_to_save; i++) {
          double rsi_normalized = NormalizeDouble(rsi[i], _Digits);
          rsi_data += DoubleToString(rsi_normalized)+",";
       }
       
-      // Saving the std Dev increments
-      // Guardamos los incrementos del std Dev
-      string increment_data = "";
+      // Saving the MACD
+      string macd_data = "";
       for(int i = 0; i < num_data_to_save; i++) {
-         double increment_normalized = NormalizeDouble(std[i]-std[i+1], _Digits);
-         increment_data += DoubleToString(increment_normalized)+",";
+         double macd_normalized = NormalizeDouble(macd[i], _Digits);
+         macd_data += DoubleToString(macd_normalized)+",";
       }
       
-      data = rsi_data+increment_data;
+      // Saving the SIGNAL
+      string signal_data = "";
+      for(int i = 0; i < num_data_to_save; i++) {
+         double signal_normalized = NormalizeDouble(signal[i], _Digits);
+         signal_data += DoubleToString(signal_normalized)+",";
+      }
+      
+      // Is the price above or below the EMA? 1 (above) 0 (below) 
+      string above_below = candles[0].close >= ema[0] ? "1," : "0,";
+      
+      // Saving the type of the cross
+      string cross_type = "";
+      if (buy_cross()) {cross_type = "1,"; last_operation = BUY;}
+      else if (sell_cross()) {cross_type = "0,"; last_operation = SELL;}
+      
+      data = ema_data+rsi_data+macd_data+signal_data+above_below+cross_type;
 
       // Sending data
       Print("[INFO]\tSending RSI and STD deviation");
