@@ -10,7 +10,7 @@ if not mt5.initialize():
     quit()
  
 # preparamos la estructura de la solicitud de compra
-symbol = "BTCEUR"
+symbol = "EURUSD"
 symbol_info = mt5.symbol_info(symbol)
 if symbol_info is None:
     print(symbol, "not found, can not call order_check()")
