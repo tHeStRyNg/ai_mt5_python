@@ -49,8 +49,6 @@ def open_position(market: str, lotage: float, type):
         "volume": lotage,
         "type": type,
         "price": price,
-        "sl": price - 100 * point,
-        "tp": price + 100 * point,
         "deviation": deviation,
         "magic": 234000,
         "comment": "python script open",

@@ -1,7 +1,10 @@
 ## AI ML - MACD, RSI, EMA BOT based on Decision Tree Neural Network
 
-AI EA bot based on the indicators **MACD**, **RSI** and **EMA** CossOver. This EA uses a **decision tree** Neural Network based on Machine Learning in Python from https://scikit-learn.org ! 
-More info --> https://www.algorithmic.one/#ai_mreb
+AI EA bot based on the indicators **MACD**, **RSI** and **EMA** CossOver. This EA uses a **Decision Tree (DTs)** which are a non-parametric supervised learning method used for classification and regression. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features. A tree can be seen as a piecewise constant approximation. 
+Ref - https://scikit-learn.org/stable/modules/tree.html#decision-treesNeural 
+Ref - Network based on Machine Learning in Python from https://scikit-learn.org ! 
+
+
 
 ### How To
 - Install Metatrader 5
