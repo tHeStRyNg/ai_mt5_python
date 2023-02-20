@@ -16,15 +16,14 @@ The goal is to create a model that predicts the value of a target variable by le
 - Go to ```Tools```
 - Click on ```Allow algorithmic trading```
 - Add ```Localhost``` for Client
-- Install MetaTrader 5 python - ```pip install MetaTrader5```
+- Install MetaTrader 5 python - ```pip install -r requirements.txt```
 - Install python extension in VSCode
 - Add url in MT5 ```localhost```
 - Install Anaconda
 - Run
 
 ### Requirements
-```pip install scikit-learn```
-```pip install pandas```
+```pip install -r requirements.txt```
 
 #### How to Setup
 1. Run dataGen.ex5 to Generate the dataset data.csv with the help of dataGen based on the last 10 years by loading the ex5 with MT5 Tester and doing a backtest.
