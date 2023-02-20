@@ -9,8 +9,8 @@ if not mt5.initialize():
     print("initialize() failed, error code =",mt5.last_error())
     quit()
  
-# prepare the structure to do a buy ordedr
-symbol = "BTCEUR"
+# prepare the structure to do a buy order
+symbol = "EURUSD"
 symbol_info = mt5.symbol_info(symbol)
 if symbol_info is None:
     print(symbol, "not found, can not call order_check()")
@@ -39,7 +39,7 @@ request = {
     "tp": price + 100 * point,
     "deviation": deviation,
     "magic": 234000,
-    "comment": "python script open",
+    "comment": "Algorithmic GMBH - Python Script Open Test - test_order.py - type_filling Validated",
     "type_time": mt5.ORDER_TIME_GTC,
     "type_filling": mt5.ORDER_FILLING_FOK,
 }
