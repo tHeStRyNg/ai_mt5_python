@@ -38,3 +38,5 @@ This will generate the data.csv with the last 10 years of correlated.
 ![Capture1](https://user-images.githubusercontent.com/118682909/219991884-dc71bca7-a9aa-47a2-b84a-6a87decf9281.PNG)
 
 5. Done It's running.
+
+![image](https://user-images.githubusercontent.com/118682909/220188225-44c9a900-59c3-4b89-9c44-091f8ae1953b.png)
